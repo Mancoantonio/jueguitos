@@ -1,0 +1,322 @@
+Actor MancoImp : Zombieman replaces Zombieman
+{
+    Health 20
+    Speed 8
+    PainChance 200
+    SeeSound "grunt/sight"
+    AttackSound "grunt/attack"
+    PainSound "grunt/pain"
+    DeathSound "grunt/death"
+    ActiveSound "grunt/active"
+
+    States
+    {
+        Spawn:
+            MNCO A 10 A_Look
+            MNCO B 10 A_Look
+            MNCO C 10 A_Look
+            MNCO D 10 A_Look
+            Loop
+
+        See:
+            MNCO E 8 A_Chase
+            MNCO F 8 A_Chase
+            MNCO G 8 A_Chase
+            MNCO H 8 A_Chase
+            Loop
+
+        Missile:
+            MNCO I 10 A_FaceTarget      // aiming wind-up
+            MNCO J 8  A_PosAttack       // Zombieman uses hitscan pistol
+            MNCO E 0  A_PlaySound("DSPISTOL")
+            Goto See
+
+        Pain:
+            MNCO A 3 A_Pain
+            MNCO J 3
+            Goto See
+
+        Death:
+            MNCO M 5
+            MNCO N 5 A_Scream
+            MNCO K 5 A_Fall
+            MNCO L -1
+            Stop
+
+        XDeath:
+            MNCO O 5
+            MNCO P 5
+            MNCO Q 5
+            MNCO R 7
+            Stop
+
+        Raise:
+            MNCO L 5
+            MNCO K 5
+            MNCO N 5
+            MNCO M 5
+            Goto See
+    }
+}
+
+// LESBA
+
+Actor LESB : LostSoul replaces LostSoul
+{
+  Speed 20
+  MeleeDamage 20
+    States
+    {
+        // SPAWN / IDLE (floating in place)
+        Spawn:
+            LESB A 5 A_Look
+            LESB A 5 A_Look
+            LESB A 5 A_Look
+            LESB A 5 A_Look
+            Loop
+
+        // FLY / CHASE
+        See:
+            LESB B 4 A_Chase
+            LESB C 4 A_Chase
+            LESB D 4 A_Chase
+            LESB D 4 A_Chase
+            Loop
+
+        // ATTACK (touching the player)
+        Missile:
+            LESB E 6 A_FaceTarget
+            LESB E 6 A_SkullAttack
+
+            Goto See
+
+        // PAIN (when hit)
+        Pain:
+            LESB C 3 A_Pain
+            LESB B 3 A_Pain
+            Goto See
+
+        // DEATH
+        Death:
+            LESB K 15
+            Stop
+
+        
+    }
+}
+
+// INSPECTOR CORNUDO
+actor Cacornudo : Cacodemon replaces Cacodemon
+{
+  
+
+  States
+  {
+    Spawn:
+      MABR B 10 A_Look
+      Loop
+
+    See:
+      MABR A 4 A_Chase
+      Loop
+
+    Missile:
+      MABR F 6 A_FaceTarget
+      MABR L 6 A_BruisAttack
+      Goto See
+
+    Pain:
+      MABR K 4
+      MABR J 4 A_Pain
+      Goto See
+
+    Death:
+      MABR I 8
+      MABR M 8 A_Scream
+      MABR N 8 A_NoBlocking
+      MABR P -1
+      Stop
+  }
+}
+
+// MANCOQL SARG
+actor MancoSarg : ShotgunGuy replaces ShotgunGuy
+{
+  Health 60
+  Radius 20
+  Height 56
+  Speed 8
+  PainChance 200
+  MONSTER
+  +SOLID
+  +SHOOTABLE
+  +COUNTKILL
+  +ISMONSTER
+  SeeSound "mancosarg/sight"
+  PainSound "mancosarg/pain"
+  DeathSound "mancosarg/death"
+  ActiveSound "mancosarg/active"
+
+  States
+  {
+    Spawn:
+      YUYI A 10 A_Look
+      YUYI C 10 A_Look
+      Loop
+
+    See:
+      YUYI E 4 A_Chase
+      YUYI F 4 A_Chase
+      YUYI E 4 A_Chase
+      YUYI G 4 A_Chase
+      YUYI F 4 A_Chase
+      Loop
+
+    Missile:
+      YUYI I 6 A_FaceTarget
+      YUYI J 6 A_PosAttack
+      Goto See
+
+    Pain:
+      YUYI B 4
+      YUYI D 4 A_Pain
+      Goto See
+
+    Death:
+      YUYI L 8
+      YUYI M 8 A_Scream
+      YUYI L 4 A_NoBlocking
+      YUYI K -1
+      Stop
+  }
+}
+
+
+// MORSAQL 
+
+actor MorsaQl : DoomImp replaces DoomImp
+{
+    States
+    {
+        Spawn:
+            MARC A 10 A_Look
+            Loop
+
+        See:
+            MARC C 1 A_FaceTarget
+            MARC E 2 A_Chase
+            MARC F 2 A_Chase
+            MARC G 2 A_Chase
+            Loop
+
+        Missile:
+            MARC J 1 A_FaceTarget
+            MARC I 6 A_TroopAttack
+            Goto See
+
+        Pain:
+            MARC G 4
+            MARC H 4 A_Pain
+            Goto See
+
+        Death:
+            MARC K 8
+            MARC L 8 A_Scream
+            MARC M 8 A_NoBlocking
+            MARC N -1 A_Fall
+            Stop
+    }
+}
+
+// Narig Onql
+
+actor Nari : Demon replaces Demon
+{
+  Health 150
+  Radius 30
+  Height 56
+  Speed 20
+  MeleeDamage 20
+  PainChance 100
+  MONSTER
+  +SOLID
+  +SHOOTABLE
+  +COUNTKILL
+  +ISMONSTER
+
+  SeeSound "mancopinky/sight"
+  PainSound "mancopinky/pain"
+  DeathSound "mancopinky/death"
+  ActiveSound "mancopinky/active"
+
+  States
+  {
+    Spawn:
+      VLAD A 10 A_Look
+      Loop
+
+    See:
+      VLAD B 3 A_Chase
+      VLAD C 3 A_Chase
+      VLAD B 3 A_Chase
+      VLAD D 3 A_Chase
+      Loop
+
+    Melee:
+      VLAD F 6 A_FaceTarget
+      VLAD G 6 A_MeleeAttack
+      Goto See
+
+    Pain:
+      VLAD I 4
+      VLAD H 4 A_Pain
+      Goto See
+
+    Death:
+      VLAD I 8
+      VLAD K 8 A_Scream
+      VLAD L 8 A_NoBlocking
+      VLAD M -1
+      Stop
+  }
+}
+
+// Menso Aranda
+
+actor Mensoql : HellKnight replaces HellKnight
+{
+    States
+    {
+        Spawn:
+            MENS A 10 A_Look
+            Loop
+
+        See:
+            MENS E 3 A_Chase
+            MENS G 3 A_Chase
+            MENS E 3 A_Chase
+            MENS F 3 A_Chase
+            Loop
+
+        Missile:
+            MENS I 8 A_FaceTarget
+            MENS I 8 A_BruisAttack  //  el ataque correcto
+            Goto See
+
+        Pain:
+            MENS B 3
+            MENS B 3 A_Pain
+            Goto See
+
+        Death:
+            MENS B 8
+            MENS C 8 A_Scream
+            MENS D 8 A_NoBlocking
+            MENS D 8
+            MENS K -1 A_Fall
+            Stop
+
+           }
+}
+
+
